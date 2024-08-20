@@ -5,6 +5,11 @@ import dotenv from "dotenv";
 dotenv.config(); // Load environment variables
 
 const app = express();
+// use middleware
+//
+app.use(express.json());
+// Middleware to parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT;
 
@@ -21,10 +26,10 @@ const startServer = async () => {
   }
 };
 
+// routes
+app.use("/api/auth", authRoutes);
 startServer();
+
 app.get("/", (req, res) => {
   res.send("<h1> Running </h1>");
 });
-
-// use middleware
-app.use("/api/auth", authRoutes);
