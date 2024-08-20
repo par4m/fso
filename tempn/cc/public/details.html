@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Blog Ninja | Blog Details</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="site-title">
+        <a href="/"><h1>Blog Ninja</h1></a>
+        <p>A Net Ninja Site</p>
+      </div>
+      <ul>
+        <li><a href="/">Blogs</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blogs/create">New Blog</a></li>
+      </ul>
+    </nav>
+
+    <!-- Blog Details -->
+    <div class="details content">
+      <h2>Sample Blog Title</h2>
+      <div class="content">
+        <p>
+          This is the body of the sample blog. Replace this with the actual blog
+          content.
+        </p>
+      </div>
+      <a class="delete" href="#" data-doc="sample-blog-id">Delete</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>Copyright &copy; Blog Ninja 2020</footer>
+
+    <!-- JavaScript for Handling Deletion -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const trashcan = document.querySelector("a.delete");
+
+        trashcan.addEventListener("click", (e) => {
+          e.preventDefault(); // Prevent the default link behavior
+
+          const endpoint = `/blogs/${trashcan.dataset.doc}`;
+
+          fetch(endpoint, {
+            method: "DELETE",
+          })
+            .then((response) => response.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        });
+      });
+    </script>
+  </body>
+</html>
