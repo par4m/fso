@@ -1,13 +1,17 @@
 import express from "express";
 import authRoutes from "./routes/authRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 import connect from "./db/connect.js";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
 dotenv.config(); // Load environment variables
 
 const app = express();
 // use middleware
 //
 app.use(express.json());
+app.use(cookieParser()); // access the cookies
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
@@ -28,6 +32,7 @@ const startServer = async () => {
 
 // routes
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 startServer();
 
 app.get("/", (req, res) => {
