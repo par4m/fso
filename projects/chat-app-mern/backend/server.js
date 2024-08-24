@@ -1,6 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/authRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import connect from "./db/connect.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -33,6 +34,8 @@ const startServer = async () => {
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
+
 startServer();
 
 app.get("/", (req, res) => {

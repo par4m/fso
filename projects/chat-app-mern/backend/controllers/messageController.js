@@ -54,7 +54,13 @@ export const getMessage = async (req, res) => {
       participants: { $all: [senderId, userToChatId] },
     }).populate("messages"); // not reference but actual messages
 
-    res.status(200).json(conversation.messages);
+    if (!conversation) {
+      return res.status(200).json([]);
+    }
+
+    const messages = conversation.messages;
+
+    res.status(200).json(messages);
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
     res.status(200).json({ error: "Internal Server Error" });
