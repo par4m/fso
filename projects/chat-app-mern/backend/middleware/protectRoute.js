@@ -11,7 +11,7 @@ const protectRoute = async (req, res, next) => {
       return res.status(401).json({ error: "Unauthorised No Token Provided" });
     }
     // verify the jwt token
-    console.log("JWT SECRET IS ", process.env.JWT_SECERT);
+    // console.log("JWT SECRET IS ", process.env.JWT_SECERT);
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!decoded) {
