@@ -1,7 +1,9 @@
+import styles from "./footer.module.css";
 const Footer = () => {
   return (
-    <div>
-      <h1>Footer</h1>
+    <div className={styles.container}>
+      <div className={styles.logo}>Param Arora</div>
+      <div className={styles.text}>All rights reversed.</div>
     </div>
   );
 };
