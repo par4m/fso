@@ -1,23 +1,25 @@
 import PostCard from "@/components/postCard/postCard";
 import styles from "./blog.module.css";
-const BlogPage = () => {
+import { getPost } from "@/lib/data";
+
+const getData = async () => {
+  const res = await fetch(`${process.env.NEXT_API_URL}/blog`);
+  if (!res.ok) {
+    throw new Error("something went wrong");
+  }
+  return res.json();
+};
+const BlogPage = async ({ params, searchParams }) => {
+  console.log(searchParams);
+  const posts = await getData()
+
   return (
     <div className={styles.container}>
-      <div className={styles.post}>
-        <PostCard />
-      </div>
-
-      <div className={styles.post}>
-        <PostCard />
-      </div>
-
-      <div className={styles.post}>
-        <PostCard />
-      </div>
-
-      <div className={styles.post}>
-        <PostCard />
-      </div>
+      {posts.map((post) => (
+        <div className={styles.post} key={post.id}>
+          <PostCard post={post} />
+        </div>
+      ))}
     </div>
   );
 };
