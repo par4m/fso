@@ -5,7 +5,8 @@ import PostUser from "@/components/postUser/postUser";
 import { Suspense } from "react";
 // import { getPost } from "@/lib/data";
 
-export const generateMetadata = async ({ params }) => {
+export const generateMetadata = async props => {
+  const params = await props.params;
   const { slug } = params;
   const post = await getPost(slug);
 
@@ -25,7 +26,8 @@ return res.json();
 };
 
 
-const SinglePostPage = async ({ params }) => {
+const SinglePostPage = async props => {
+  const params = await props.params;
   const { slug } = params;
   const post = await getPost(slug);
   return (

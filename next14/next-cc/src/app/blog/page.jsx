@@ -9,7 +9,8 @@ const getData = async () => {
   }
   return res.json();
 };
-const BlogPage = async ({ params, searchParams }) => {
+const BlogPage = async props => {
+  const searchParams = await props.searchParams;
   console.log(searchParams);
   const posts = await getData()
 

@@ -2,7 +2,8 @@ import { Post } from "@/lib/models";
 import connectToDb from "@/app/lib/utils";
 import { NextResponse } from "next/server";
 
-export const GET = async (request, {params}) => {
+export const GET = async (request, props) => {
+  const params = await props.params;
   const {slug} = params;
   try {
     connectToDb();
